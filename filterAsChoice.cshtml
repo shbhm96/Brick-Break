@@ -1,0 +1,110 @@
+﻿@model MVCApplication.Models.Car
+
+<div class="container">
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Maruti Udyog Ltd", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })\
+
+               
+                </div>
+                <div class="navbar-collapse collapse">
+                    <div class="form-group">
+
+                        <form method="get" action="~/Controllers/Home/getDetails">
+                            <ul class="nav navbar-nav">
+
+
+                                <li>
+                                    <select class="form-control" name="Category" >
+                                        <option value="" selected>Select Category</option>
+                                        @{
+                                            foreach (string s in ViewBag.Category)
+                                            {
+                                                <option value="@s">@s</option>
+                                            }
+                                        }
+                                    </select>
+                                </li>
+                                <li>
+                                    <select class="form-control" name="Name" > 
+                                        <option value="" selected>Select Car</option>
+                                        @{
+                                            foreach (string s in ViewBag.CarName)
+                                            {
+                                                <option value="@s">@s</option>
+                                            }
+                                        }
+                                    </select>
+                                </li>
+                                <li>
+                                    <select class="form-control" name="Region" >
+                                        <option value="" selected>Select Region</option>
+                                        @{
+                                            foreach (string s in ViewBag.Region)
+                                            {
+                                                <option value="@s">@s</option>
+                                            }
+                                        }
+                                    </select>
+                                </li>
+                                <li>
+                                    <select class="form-control" name="Color" >
+                                        <option value="" selected>Select Color</option>
+                                        @{
+                                            foreach (string s in ViewBag.Color)
+                                            {
+                                                <option value="@s">@s</option>
+                                            }
+                                        }
+                                    </select>
+                                </li>
+                                <li>
+                                    <select class="form-control" name="Range">
+                                        <option value="" selected>Maximum Range(₹ in Lakhs)</option>
+                                        @{
+                                            foreach (string s in ViewBag.Price)
+                                            {
+                                                <option value="@s">@s</option>
+                                            }
+                                        }
+                                    </select>
+                                </li>
+                                <li>
+                                   <input type="submit"  onclick="check()"/>
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+   @{
+       List<string> li = new List<string>();
+       foreach (var s in ViewBag.filter)
+       {
+           li.Add(s);
+       }
+   }
+
+    if (@li.Contains("color"))
+        document.getElementsByName("color")[0].setAttribute("required", "true");
+    if (@li.Contains("Name"))
+        document.getElementsByName("Name")[0].setAttribute("required", "true");
+    if (@li.Contains("Price"))
+        document.getElementsByName("Price")[0].setAttribute("required", "true");
+    if (@li.Contains("Category"))
+        document.getElementsByName("Catgory")[0].setAttribute("required", "true");
+    if (@li.Contains("Region"))
+        document.getElementsByName("Region")[0].setAttribute("required", "true");
+
+</script>

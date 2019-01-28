@@ -1,0 +1,187 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="StyleSheet2.css" rel="stylesheet" type="text/css" />
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="Scripts/jquery-3.0.0.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+    <script src="Scripts/popper.min.js"></script>
+
+
+    <style>
+        #Image1 {
+            height: 150px;
+        }
+
+        #Button1 {
+            background-color: white;
+            border: none;
+            font-size: 20px;
+            color: brown;
+            cursor: pointer;
+        }
+
+        #Button2 {
+            background-color: white;
+            border: none;
+            font-size: 20px;
+            color: brown;
+            cursor: pointer;
+        }
+
+        #Button3 {
+            background-color: white;
+            border: none;
+            font-size: 20px;
+            color: brown;
+            cursor: pointer;
+        }
+
+        #Button4 {
+            background-color: burlywood;
+            border: none;
+            color: black;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 2px;
+            padding: 2px 5px;
+        }
+
+        #Image2 {
+            align-content: center;
+        }
+
+        .middle {
+            height: 100%;
+            background-color: white;
+        }
+
+        .top {
+            height: 10%;
+        }
+
+        .heading {
+            margin: 5%;
+            width: 50%;
+            border: none;
+            padding: 5px;
+        }
+
+
+        #Button1:hover {
+            background-color: bisque;
+            font-size: large;
+        }
+
+        #Button2:hover {
+            background-color: bisque;
+            font-size: large;
+        }
+
+        #Button3:hover {
+            background-color: coral;
+            font-size: large;
+        }
+
+        #Button4:hover {
+            background-color: burlywood;
+            font-size: large;
+        }
+
+        .mid-left {
+            float: left;
+            width: 15%;
+            height: initial;
+            background-color: white;
+        }
+
+        .heading {
+            float: right;
+        }
+
+        .mid-right {
+            float: right;
+            height: 100%;
+            width: 85%
+        }
+    </style>
+
+</head>
+<body>
+   
+        <div class="top">
+            <img src="~/images/logo.jpg" id="Image1" />
+            <div class="heading">
+                <input id="Button1" type="button" value="Home" onclick="startSlideShow()" />
+                <input id="Button3" type="button" value="Back" />
+            </div>
+        </div>
+
+        <div class="middle">
+            <div class="mid-left">
+                <p><strong>Select the filters</strong></p>
+                <form method="post" action="~/Controllers/Home/filterAsChoice">
+                    <input id="0" type="checkbox" name="c1" value="color"/><strong>Color</strong><br />
+                    <input id="1" type="checkbox" name="c2" value="Name"/><strong>Car Name</strong><br />
+                    <input id="2" type="checkbox" name="c3" value="Price"/><strong>Price</strong><br />
+                    <input id="3" type="checkbox" name="c4" value="Category"/><strong>Category</strong><br />
+                    <input id="4" type="checkbox" name="c5" value="Region"/><strong>Region</strong><br />
+                    <br />
+                    <input type="Submit" value="Search" onclick="check()" />
+               </form>
+                    <br />
+                    <p id="demo"></p>
+</div>
+           
+            <div class="mid-right">
+
+                <img src="/images/1.jpg" id="image" style="height:100%; width:100%" />
+                <br />
+                <div id="result"></div>
+               
+            </div>
+        </div>
+        <div>
+
+        </div>
+    <script>
+       
+        function startSlideShow() {
+            var intervalId;
+                intervalId = setInterval(changeImage, 3000);
+            }
+                function changeImage() {
+                    var imageSrc = document.getElementById("image").getAttribute("src");
+                    var currentImageNumber = imageSrc.substring(imageSrc.lastIndexOf("/") + 1, imageSrc.lastIndexOf("/") + 2);
+                    if (currentImageNumber == 4) {
+                currentImageNumber = 0;
+                    }
+                    var newImage = "/images/" + (Number(currentImageNumber) + 1) + ".jpg";
+
+                    document.getElementById("image").setAttribute("src", newImage);
+                }
+    
+
+                function check() {
+                    var x = [];
+                    var count = 0;
+                    for (var i = 0; i < 5; i++) {
+                        x[i] = document.getElementById(i).checked;
+                        if (x[i] == true)
+                            count = count + 1;
+
+                    }
+                    if (count == 0)
+                        alert("Please Select atleast one of the filters");
+                    document.getElementById("demo").innerHTML = x;
+                }
+    </script>
+</body>
+</html>
